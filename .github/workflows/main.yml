@@ -8,6 +8,6 @@ jobs:
     steps:
       - #if: github.event.issue.user.login != github.repository_owner
         name: Close Issue
-        run: gh issue delete  ${{ github.event.issue.number }} --yes
+        run: gh issue delete  ${{ github.event.issue.id }} --yes
         env:
           GH_TOKEN: ${{ github.token }}
