@@ -8,8 +8,9 @@ jobs:
     steps:
       - #if: github.event.issue.user.login != github.repository_owner
         name: Close Issue
-        run: gh issue delete  ${{ github.event.issue.number }} -R ${{ OWNER }}/${{ REPO }} --yes
+        run: gh issue delete $NUMBER -R $OWNER/$REPO --yes
         env:
           GH_TOKEN: ${{ github.token }}
+          NUMBER: ${{ github.event.issue.number }}
           OWNER: ${{ github.repository_owner }}
           REPO: ${{ github.event.repository.name }}
