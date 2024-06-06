@@ -12,7 +12,7 @@ jobs:
         name: Close Issue
         run: gh issue delete $NUMBER --yes #-R $OWNER/$REPO --yes
         env:
-          GH_TOKEN: ${{ github.token }}
+          GH_TOKEN: ${{ secrets.ISSUE_CLOSE_TOKEN }} # admin role for delete
           NUMBER: ${{ github.event.issue.number }}
           GH_REPO: ${{ github.repository }}
           #OWNER: ${{ github.repository_owner }}
