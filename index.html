@@ -2,7 +2,7 @@
 
 <html>
   <head>
-    <title>Issuance</title>
+    <title>lepffm github issue blog</title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -18,15 +18,16 @@
       import marked from 'https://unpkg.com/marked@0.8.0/lib/marked.esm.js';
 
       const html = htm.bind(React.createElement)
+      const owner = 'lepffm'
 
       const Header = (props) => {
         return html`
           <div className="header">
             <h1 className="title">
-              <a href="index.html"><strong>issuanceX</strong></a>
+              <a href="index.html"><strong>lepffm github issue blog</strong></a>
             </h1>
             <p className="description">
-              Open, free blogging on <strong>Github pages</strong> with <strong>Github issues</strong>.
+              somewhere over the rainbow...
             </p>
           </div>
         `;
@@ -37,7 +38,7 @@
           async function fetchMilestones() {
             if (!milestones) {
               const { url, ...options } = endpoint("GET /repos/:owner/:repo/milestones", {
-                owner: "lepffm",
+                owner: owner,
                 repo: "issuance"
               });
               const res = await fetch(url, options);
@@ -66,14 +67,6 @@
                 </ul>
           `)}
 </div>
-<!--<nav>
-<ul>
-<li><a href="https://github.com/lepffm/issuance/milestone/1">Culture</a></li>
-<li><a href="https://github.com/lepffm/issuance/milestone/2">IT Technology</a></li>
-<li><a href="https://github.com/lepffm/issuance/milestone/4">Society</a></li>
-<li><a href="https://github.com/lepffm/issuance/milestone/3">Others</a></li>
-</ul>
-</nav>-->
 <hr/><h/r>
         `;
       }
@@ -126,7 +119,7 @@
                   key={${number}}
                 >
                   <h1 className="title">
-                    <a href="?${number}">
+                    <a href="https://github.com/lepffm/issuance/issues/${number}">
                       ${title}
                     </a>
                   </h1>
