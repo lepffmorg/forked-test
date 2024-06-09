@@ -43,6 +43,12 @@
 </nav>
         `;
       }
+      const Footer = (props) => {
+        return html`
+        <div class="markdown-heading" dir="auto">
+<p dir="auto"><a href="http://openrss.org/github.com/lepffm/issuance/issues" rel="nofollow">RSS Link</a></p>
+        </div>
+        `;
       const Posts = (props) => {
         const [issues, setIssues] = React.useState();
 
@@ -130,7 +136,9 @@
       ReactDOM.render(
         html`
           <${Header} />
+          <${Categories} />
           <${Posts} />
+          <${Footer} />
         `,
         document.querySelector('#issuance')
       )
