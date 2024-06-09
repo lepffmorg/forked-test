@@ -32,16 +32,48 @@
         `;
       }
       const Categories = (props) => {
+        const [milestones, setMilestones] = React.useState();
+        React.useEffect(() => {
+          async function fetchMilestones() {
+            if (!milestones) {
+              const { url, ...options } = endpoint("GET /repos/:owner/:repo/milestones", {
+                owner: "lepffm",
+                repo: "issuance"
+              });
+              const res = await fetch(url, options);
+              setMilestones(await res.json());
+            }
+          }
+
+          fetchMilestones();
+        }, [milestones]);
+        
         return html`
 <h2>Categories</h2>
-<nav>
+<div className="posts">
+            ${(issues || []) 
+            .filter(({ state }) => state === 'open')
+            .map(({
+                number,
+                title,
+                description,
+              })  => html`
+              <ul
+                  id={${number}}
+                  key={${number}}
+                >
+                <li><a href="https://github.com/lepffm/issuance/milestone/${number}">${title}</a> ${description}</li>
+                </ul>
+          `)}
+</div>
+<!--<nav>
 <ul>
 <li><a href="https://github.com/lepffm/issuance/milestone/1">Culture</a></li>
 <li><a href="https://github.com/lepffm/issuance/milestone/2">IT Technology</a></li>
 <li><a href="https://github.com/lepffm/issuance/milestone/4">Society</a></li>
 <li><a href="https://github.com/lepffm/issuance/milestone/3">Others</a></li>
 </ul>
-</nav>
+</nav>-->
 <hr/><h/r>
         `;
       }
@@ -60,8 +92,7 @@
             if (!issues) {
               const { url, ...options } = endpoint("GET /repos/:owner/:repo/issues", {
                 owner: "lepffm",
-                repo: "issuance",
-                //auth: 'x'
+                repo: "issuance"
               });
               const res = await fetch(url, options);
               setIssues(await res.json());
@@ -131,9 +162,9 @@
                     dangerouslySetInnerHTML="${{ __html: marked(body).replace(/<pre>/g, '<pre class="prettyprint">')}}"
                   />
                 </div>
+                <hr/>
               `)}
           </div>
-          <hr/>
         `
       }
 
