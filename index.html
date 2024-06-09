@@ -31,7 +31,18 @@
           </div>
         `;
       }
-
+      const Categories = (props) => {
+        return html`
+<nav>
+<ul style="display:flex;position:relative">
+<li><a href="https://github.com/lepffm/issuance/milestone/1">Culture</a></li>
+<li><a href="https://github.com/lepffm/issuance/milestone/2">IT Technology</a></li>
+<li><a href="https://github.com/lepffm/issuance/milestone/4">Society</a></li>
+<li><a href="https://github.com/lepffm/issuance/milestone/3">Others</a></li>
+</ul>
+</nav>
+        `;
+      }
       const Posts = (props) => {
         const [issues, setIssues] = React.useState();
 
