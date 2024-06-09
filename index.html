@@ -19,6 +19,7 @@
 
       const html = htm.bind(React.createElement)
       const owner = 'lepffm'
+      const repoName = "issuance"
 
       const Header = (props) => {
         return html`
@@ -39,7 +40,7 @@
             if (!milestones) {
               const { url, ...options } = endpoint("GET /repos/:owner/:repo/milestones", {
                 owner: owner,
-                repo: "issuance"
+                repo: repoName
               });
               const res = await fetch(url, options);
               setMilestones(await res.json());
@@ -63,7 +64,7 @@
                   id={${number}}
                   key={${number}}
                 >
-                <li><a href="https://github.com/lepffm/issuance/milestone/${number}">${title}</a> ${description}</li>
+                <li><a href="https://github.com/${owner}/${repoName}/milestone/${number}">${title}</a> ${description}</li>
                 </ul>
           `)}
 </div>
@@ -73,7 +74,7 @@
       const Footer = (props) => {
         return html`
         <div class="markdown-heading" dir="auto">
-<p dir="auto"><a href="http://openrss.org/github.com/lepffm/issuance/issues" rel="nofollow">RSS Link</a></p>
+<p dir="auto"><a href="http://openrss.org/github.com/${owner}/${repoName}/issues" rel="nofollow">RSS Link</a></p>
         </div>
         `;
       }
@@ -84,8 +85,8 @@
           async function fetchIssues() {
             if (!issues) {
               const { url, ...options } = endpoint("GET /repos/:owner/:repo/issues", {
-                owner: "lepffm",
-                repo: "issuance"
+                owner: owner,
+                repo: repoName
               });
               const res = await fetch(url, options);
               setIssues(await res.json());
@@ -102,7 +103,7 @@
         return html`
           <div className="posts">
             ${(issues || [])
-              .filter(({ user }) => user.login === 'lepffm')
+              .filter(({ user }) => user.login === owner)
               .filter(({ number }) => !search || Number(search.slice(1)) === number)
               .map(({
                 number,
